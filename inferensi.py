@@ -1,13 +1,28 @@
 import streamlit as st
 import joblib
 import numpy as np
+import pandas as pd
 
 # Load model dan encoder
 model = joblib.load('model/model.joblib')
 
+columns = [
+    'Curricular_units_2nd_sem_grade',
+    'Curricular_units_2nd_sem_approved',
+    'Curricular_units_1st_sem_grade',
+    'Curricular_units_1st_sem_approved',
+    'Tuition_fees_up_to_date',
+    'Age_at_enrollment',
+    'Scholarship_holder',
+    'Debtor',
+    'Gender',
+    'Application_mode'
+]
+
 st.title("🎓 Prediksi Status Mahasiswa")
 
 st.markdown("Masukkan data mahasiswa untuk memprediksi apakah mereka akan **Graduate**, **Dropout**, atau masih **Enrolled**.")
+
 
 # Input dari user
 age = st.slider("Umur saat masuk (Age at Enrollment)", 17, 70, 20)
@@ -27,7 +42,8 @@ gender = st.selectbox("Gender", ['Female', 'Male'])
 binary_map = {'No': 0, 'Yes': 1}
 gender_map = {'Female': 0, 'Male': 1}
 
-input_data = np.array([[
+# Membuat input_data sesuai dengan kolom yang diharapkan oleh model
+input_data = pd.DataFrame([[
     age,
     admission_grade,
     curricular_units_1st_sem_grade,
@@ -38,9 +54,14 @@ input_data = np.array([[
     binary_map[tuition_up_to_date],
     binary_map[scholarship],
     gender_map[gender]
-]])
+]], columns=columns)
 
-if st.button("Prediksi"):
+# Cek apakah data input memiliki bentuk yang sesuai
+if input_data.shape[1] != len(columns):
+    st.error(f"Data input harus memiliki {len(columns)} fitur, saat ini memiliki {input_data.shape[1]} fitur.")
+else:
+    # Prediksi jika jumlah fiturnya benar
     pred = model.predict(input_data)[0]
     label_map = {0: 'Dropout', 1: 'Enrolled', 2: 'Graduate'}
     st.success(f"📊 Prediksi Status Mahasiswa: **{label_map[pred]}**")
+
