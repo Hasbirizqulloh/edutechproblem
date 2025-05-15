@@ -55,7 +55,7 @@ python -m venv env
 # Windows: .\env\Scripts\activate  
 # MacOS/Linux: source env/bin/activate  
 pip install -r requirements.txt
-streamlit run inferensi.py
+streamlit run app.py
 ```
 
 🚀 Link Prototype : [Klik Disini](https://edutechproblem-nsfc9yjgpus4xeuznyzttx.streamlit.app/)
