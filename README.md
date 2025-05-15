@@ -58,9 +58,7 @@ pip install -r requirements.txt
 streamlit run inferensi.py
 ```
 
-🚀 Link Prototype (opsional)
-
-[Klik Disini](https://prediksikelulusanmahasiswa.streamlit.app/)
+🚀 Link Prototype : [Klik Disini](https://prediksikelulusanmahasiswa.streamlit.app/)
 
 ## Conclusion
 Proyek ini berhasil mengembangkan dashboard interaktif dan prototype sistem machine learning untuk memantau serta memprediksi performa akademik mahasiswa. Berdasarkan data historis, dashboard mampu memberikan wawasan visual yang jelas terkait distribusi status mahasiswa, rata-rata nilai, hingga faktor-faktor risiko dropout seperti status pembayaran UKT, penerima beasiswa, dan hutang pendidikan.
